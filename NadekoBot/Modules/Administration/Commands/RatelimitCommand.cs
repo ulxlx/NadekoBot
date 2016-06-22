@@ -11,7 +11,7 @@ namespace NadekoBot.Modules.Administration.Commands
 
         public static ConcurrentDictionary<ulong, ConcurrentDictionary<ulong, DateTime>> RatelimitingChannels = new ConcurrentDictionary<ulong, ConcurrentDictionary<ulong, DateTime>>();
 
-        private static readonly TimeSpan ratelimitTime = new TimeSpan(0, 0, 0, 5);
+        private static readonly TimeSpan ratelimitTime = new TimeSpan(0, 0, 0, 15);
 
         public RatelimitCommand(DiscordModule module) : base(module)
         {
@@ -54,7 +54,7 @@ namespace NadekoBot.Modules.Administration.Commands
                     if (RatelimitingChannels.TryAdd(e.Channel.Id, new ConcurrentDictionary<ulong, DateTime>()))
                     {
                         await e.Channel.SendMessage("Slow mode initiated. " +
-                                                    "Users can't send more than 1 message every 5 seconds.")
+                                                    "Users can't send more than 1 message every 15 seconds.")
                                                     .ConfigureAwait(false);
                     }
                 });
